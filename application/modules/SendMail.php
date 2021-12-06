@@ -100,7 +100,7 @@ class SendMail extends PageCarton_Widget
             case 587:
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
             break;
-        }
+        }  
 
         //Whether to use SMTP authentication
         $mail->SMTPAuth = true;
