@@ -87,12 +87,21 @@ class SendMail extends PageCarton_Widget
         //Set the SMTP port number:
         // - 465 for SMTP with implicit TLS, a.k.a. RFC8314 SMTPS or
         // - 587 for SMTP+STARTTLS
-        $mail->Port = SendMailSettings::retrieve( 'port') ? : 465;
+        $mail->Port = intval( SendMailSettings::retrieve( 'port') ? : 465 );
 
         //Set the encryption mechanism to use:
         // - SMTPS (implicit TLS on port 465) or
         // - STARTTLS (explicit TLS on port 587)
-        $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        switch( $mail->Port )
+        {
+            case 465:
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+            break;
+            case 587:
+                $mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+            break;
+
+        }
 
         //Whether to use SMTP authentication
         $mail->SMTPAuth = true;
@@ -123,7 +132,6 @@ class SendMail extends PageCarton_Widget
             
             //Set who the message is to be sent to
             $mail->addAddress( $pts['email'], $pts['name'] );
-
         }
 
         $pts = self::splitEmailParts( $mailInfo['return-path'] );

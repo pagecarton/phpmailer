@@ -19,8 +19,6 @@
 
 class SendMailSettings extends PageCarton_Settings
 {
-
-
 	
     /**
      * creates the form for creating and editing
@@ -46,7 +44,6 @@ class SendMailSettings extends PageCarton_Settings
 				$settings = $values;
 			}
 		}
-	//	$settings = unserialize( @$values['settings'] ) ? : $values['settings'];
         $form = new Ayoola_Form( array( 'name' => $this->getObjectName() ) );
 		$form->submitValue = $submitValue ;
 		$form->oneFieldSetAtATime = true;
@@ -55,7 +52,7 @@ class SendMailSettings extends PageCarton_Settings
 
 
         //  Sample Text Field Retrieving E-mail Address
-		$fieldset->addElement( array( 'name' => 'from', 'label' => 'From E-mail Address', 'placeholder' => 'e.g. email@example.com', 'value' => @$settings['email_address'], 'type' => 'InputText' ) );
+		$fieldset->addElement( array( 'name' => 'from', 'label' => 'From E-mail Address', 'placeholder' => 'e.g. email@example.com', 'value' => @$settings['from'], 'type' => 'InputText' ) );
 		$fieldset->addElement( array( 'name' => 'server', 'label' => 'SMTP Server', 'placeholder' => 'e.g. smtp.example.com', 'value' => @$settings['server'], 'type' => 'InputText' ) );
         $fieldset->addElement( array( 'name' => 'port', 'label' => 'SMTP Port', 'placeholder' => 'e.g. 465', 'value' => @$settings['port'], 'type' => 'InputText' ) );
 
